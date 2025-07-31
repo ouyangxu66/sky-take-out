@@ -1,0 +1,7 @@
+#使得git管理忽略的文件
+**/target/
+.idea
+*.iml
+*.class
+*Test.java
+**/test/
