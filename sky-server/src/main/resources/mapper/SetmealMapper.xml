@@ -7,6 +7,7 @@
         insert into setmeal(category_id, name, price, description, image,status)
                     values (#{categoryId}, #{name}, #{price}, #{description}, #{image},#{status})
     </insert>
+
     <delete id="deleteByIds">
         delete from setmeal where id in 
             <foreach collection="ids" item="id" open="(" close=")">
@@ -28,4 +29,16 @@
                 </where>
         order by update_time desc
     </select>
+    <update id="update">
+        update setmeal
+        <set>
+            <if test="categoryId!=null">category_id=#{categoryId} </if>
+            <if test="name!=null">,name=#{name} </if>
+            <if test="price!=null">,price=#{price} </if>
+            <if test="status!=null">,status=#{status} </if>
+            <if test="description!=null">,description=#{description} </if>
+            <if test="image!=null">,image=#{image} </if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>
