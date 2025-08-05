@@ -2,7 +2,6 @@ package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
-import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
@@ -66,4 +65,13 @@ public interface DishMapper {
      */
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+
+    /**
+     * 根据分类id查询菜品
+     *
+     * @param categoryId
+     * @return
+     */
+    @Select("select *from dish where category_id=#{categoryId}")
+    List<Dish> getByCategoryId(Long categoryId);
 }
