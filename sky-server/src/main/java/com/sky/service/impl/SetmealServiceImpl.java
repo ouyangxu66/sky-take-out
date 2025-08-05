@@ -1,16 +1,22 @@
 package com.sky.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.sky.constant.MessageConstant;
+import com.sky.constant.StatusConstant;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageQueryDTO;
 import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
+import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.SetmealService;
+import com.sky.vo.SetmealVO;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections4.BagUtils;
 import org.springframework.beans.BeanUtils;
@@ -53,5 +59,32 @@ public class SetmealServiceImpl implements SetmealService {
         }
     }
 
+    /**
+     * 分页查询套餐信息
+     * @param setmealPageQueryDTO
+     * @return
+     */
+    @Override
+    public PageResult page(SetmealPageQueryDTO setmealPageQueryDTO) {
+        PageHelper.startPage(setmealPageQueryDTO.getPage(),setmealPageQueryDTO.getPageSize());
+        Page<SetmealVO> page=setmealMapper.page(setmealPageQueryDTO);
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 批量删除套餐
+     * @param ids
+     * @return
+     */
+    @Override
+    public void deleteBatch(List<Long> ids) {
+        for (Long id : ids) {
+            Setmeal setmeal=setmealMapper.getById(id);
+            if (setmeal.getStatus()== StatusConstant.DISABLE){
+                throw new DeletionNotAllowedException(MessageConstant.SETMEAL_ON_SALE);
+            }
+        }
+        setmealMapper.deleteByIds(ids);
+    }
 
 }
