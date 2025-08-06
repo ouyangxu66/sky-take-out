@@ -11,3 +11,8 @@ sky:
     access-key-secret: 43U8qgc2mMFCTJB9ImnNYpA2WRAdz0
     endpoint: oss-cn-beijing.aliyuncs.com
     bucket-name: java-sky-take-out-xu
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 10
