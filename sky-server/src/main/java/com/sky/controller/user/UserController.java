@@ -45,12 +45,13 @@ public class UserController {
         //为微信用户生成jwt令牌
         Map<String,Object> claims=new HashMap<>();
         claims.put(JwtClaimsConstant.USER_ID,user.getId());
-        JwtUtil.createJWT(jwtProperties.getUserSecretKey(),jwtProperties.getUserTtl(),claims);
+        String token = JwtUtil.createJWT(jwtProperties.getUserSecretKey(), jwtProperties.getUserTtl(), claims);
 
         //创建UserLoginVO对象,添加id和openid属性
         UserLoginVO userLoginVO = UserLoginVO.builder()
                 .id(user.getId())
                 .openid(user.getOpenid())
+                .token(token)
                 .build();
 
         return Result.success(userLoginVO);
