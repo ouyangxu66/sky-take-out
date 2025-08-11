@@ -1,5 +1,7 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
+import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.entity.Orders;
 import com.sky.vo.OrderSubmitVO;
@@ -28,4 +30,10 @@ public interface OrderMapper {
      */
     void update(Orders orders);
 
+    /**
+     * 查询历史订单
+     * @param ordersPageQueryDTO
+     * @return
+     */
+    Page<Orders> page(OrdersPageQueryDTO ordersPageQueryDTO);
 }

@@ -26,4 +26,16 @@
         </set>
         where id = #{id}
     </update>
+    <select id="page" resultType="com.sky.entity.Orders">
+        select *from orders
+        <where>
+            <if test="userId!=null">
+                userId=#{userId}
+            </if>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+        </where>
+        order by order_time
+    </select>
 </mapper>
