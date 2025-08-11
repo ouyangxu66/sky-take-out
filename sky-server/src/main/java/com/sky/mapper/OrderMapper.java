@@ -6,6 +6,7 @@ import com.sky.dto.OrdersSubmitDTO;
 import com.sky.entity.Orders;
 import com.sky.vo.OrderStatisticsVO;
 import com.sky.vo.OrderSubmitVO;
+import com.sky.vo.OrderVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -61,4 +62,6 @@ public interface OrderMapper {
      */
     @Select("select count(id)from orders where status=#{status}")
     Integer countStatus(Integer status);
+
+    OrderVO orderDetail(Long id);
 }
