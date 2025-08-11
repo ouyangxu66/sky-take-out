@@ -7,6 +7,7 @@ import com.sky.entity.Orders;
 import com.sky.vo.OrderSubmitVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface OrderMapper {
@@ -36,4 +37,20 @@ public interface OrderMapper {
      * @return
      */
     Page<Orders> page(OrdersPageQueryDTO ordersPageQueryDTO);
+
+    /**
+     * 取消订单
+     * @param id
+     * @return
+     */
+    @Update("update orders set status=6 where id=#{id}")
+    void cancel(Long id);
+
+    /**
+     * 根据订单id查询订单
+     * @param id
+     * @return
+     */
+    @Select("select *from orders where id=#{id}")
+    Orders getByOrderId(Long id);
 }
