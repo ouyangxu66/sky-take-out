@@ -76,4 +76,13 @@ public interface OrderMapper {
     List<Orders> getByStatusAndOrderTime(Integer status, LocalDateTime orderTime);
 
 
+    /**
+     * 用于替换微信支付更新数据库状态的问题
+     * @param orderStatus
+     * @param orderPaidStatus
+     */
+    @Update("update orders set status = #{orderStatus},pay_status = #{orderPaidStatus} ,checkout_time = #{check_out_time} " +
+            "where number = #{orderNumber}")
+    void updateStatus(Integer orderStatus, Integer orderPaidStatus, LocalDateTime check_out_time, String orderNumber);
+
 }

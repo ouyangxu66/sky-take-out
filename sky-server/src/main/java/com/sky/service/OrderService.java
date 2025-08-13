@@ -90,7 +90,7 @@ public interface OrderService {
      * @param ordersCancelDTO
      * @return
      */
-    void adminCancelById(OrdersCancelDTO ordersCancelDTO);
+    void adminCancelById(OrdersCancelDTO ordersCancelDTO) throws Exception;
 
     /**
      * 派送订单
