@@ -55,3 +55,7 @@ sky:
   wechat:
     appid: ${sky.wechat.appid}
     secret: ${sky.wechat.secret}
+  shop:
+    addres: 湖南省湘潭市雨湖区北二环路湘潭大学
+  baidu:
+    ak: EtuGSbgwbFA2HStqXLjBmVwGtOrJ1ePE
